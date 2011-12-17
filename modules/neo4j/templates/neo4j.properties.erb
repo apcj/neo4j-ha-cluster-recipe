@@ -30,7 +30,7 @@ ha.coordinators=192.168.1.101:2181,192.168.1.102:2181,192.168.1.103:2181
 # IP and port for this instance to bind to to communicate data with the
 # other neo4j instances in the cluster. This is broadcasted to the other
 # cluster members, so different members can have different communication ports.
-ha.server = <%= ipaddress %>:6001
+ha.server = <%= ha_server_ip_address %>:6001
 
 # The interval at which slaves will pull updates from the master. Comment out 
 # the option to disable periodic pulling of updates. Unit is seconds.

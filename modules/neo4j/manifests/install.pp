@@ -17,7 +17,7 @@ class neo4j {
     }
     
     file {
-      "$neo4j_home/conf/myid":
+      "$neo4j_home/data/coordinator/myid":
         ensure => file,
         owner => $neo4j_user,
         content => $ha_server_id,
@@ -55,7 +55,7 @@ class neo4j {
         creates => "$neo4j_home/data/neo4j-coord.pid",
         user => $neo4j_user,
         logoutput => true,
-        require => [File["$neo4j_home/conf/myid"], File["$neo4j_home/conf/coord.cfg"]]
+        require => [File["$neo4j_home/data/coordinator/myid"], File["$neo4j_home/conf/coord.cfg"]]
     }
   }
 }

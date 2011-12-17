@@ -1,6 +1,4 @@
-# Basic Puppet manifests
-
-class neo4j-ha-server {
+class basic_java {
 
   exec { "apt-update":
     command => "/usr/bin/apt-get update",
@@ -13,10 +11,4 @@ class neo4j-ha-server {
   group { "puppet": 
     ensure => "present", 
   }
-
-  class { "neo4j::install":
-    ha_server_id => 1
-  }
 }
-
-include neo4j-ha-server

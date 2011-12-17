@@ -16,10 +16,9 @@ syncLimit=5
 # the ZooKeeper service.where X is ids of servers.
 # nnnn:    quorum election port
 # mmmm:  leader election port
-<%= coordinator_list %>
-# server.1=192.168.1.101:2888:3888    
-# server.2=192.168.1.102:2888:3888    
-# server.3=192.168.1.103:2888:3888    
+server.1=192.168.1.101:2888:3888    
+server.2=192.168.1.102:2888:3888    
+server.3=192.168.1.103:2888:3888    
 
 # dataDir : the location to store the in-memory database snapshots and, .unless specified otherwise, the transaction log of updates to the database.  
 dataDir=data/coordinator/

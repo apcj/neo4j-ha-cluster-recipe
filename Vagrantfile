@@ -11,6 +11,7 @@ Vagrant::Config.run do |config|
       puppet.manifests_path = "manifests"
       puppet.module_path = "modules"
       puppet.manifest_file = "neo4j-ha-server.pp"
+      # puppet.options = "--verbose --debug"
     end
   end
 

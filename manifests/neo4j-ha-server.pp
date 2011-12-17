@@ -14,7 +14,9 @@ class neo4j-ha-server {
     ensure => "present", 
   }
 
-  include neo4j::install
+  class { "neo4j::install":
+    ha_server_id => 1
+  }
 }
 
 include neo4j-ha-server

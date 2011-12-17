@@ -1,16 +1,11 @@
 class neo4j {
-  class install {
+  class install ($ha_server_id) {
     
-    $ha_server_id = 1
+    $ha_server_ip_address = "192.168.1.10$ha_server_id"
     
     $neo4j_user = "vagrant"
     $user_home = "/home/vagrant"
     $neo4j_home = "$user_home/neo4j-enterprise-1.6.M02"
-    
-    file {
-      '/home/vagrant':
-        ensure => directory
-    }
     
     exec {
       'extract tarball':
@@ -57,10 +52,10 @@ class neo4j {
       "start coordinator":
         cwd => "$neo4j_home",
         command => "$neo4j_home/bin/neo4j-coordinator start",
-        unless => "/usr/bin/test -e $neo4j_home/data/neo4j-coord.pid",
+        creates => "$neo4j_home/data/neo4j-coord.pid",
         user => $neo4j_user,
         logoutput => true,
-        require => Exec['extract tarball']
+        require => [File["$neo4j_home/conf/myid"], File["$neo4j_home/conf/coord.cfg"]]
     }
   }
 }

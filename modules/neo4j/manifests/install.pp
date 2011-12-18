@@ -5,15 +5,33 @@ class neo4j {
     
     $neo4j_user = "vagrant"
     $user_home = "/home/vagrant"
-    $neo4j_home = "$user_home/neo4j-enterprise-1.6.M02"
+    $downloads = "$user_home/downloads"
+    $distribution = "neo4j-enterprise-1.6.M02"
+    $neo4j_home = "$user_home/$distribution"
+    
+    file {
+      "$downloads":
+        ensure => directory,
+        owner => $neo4j_user
+    }
+    
+    exec {
+      'download tarball':
+        cwd => $downloads,
+        user => $neo4j_user,
+        creates => "$downloads/$distribution-unix.tar.gz",
+        command => "wget http://dist.neo4j.org/$distribution-unix.tar.gz",
+        path => ['/bin', '/usr/bin']
+    }
     
     exec {
       'extract tarball':
         cwd => $user_home,
         creates => $neo4j_home,
         user => $neo4j_user,
-        command => 'tar xzf /host_mount/neo4j-enterprise-1.6.M02-unix.tar.gz',
-        path => ['/bin', '/usr/bin']
+        command => "tar xzf $downloads/$distribution-unix.tar.gz",
+        path => ['/bin', '/usr/bin'],
+        require => Exec['download tarball']
     }
     
     file {

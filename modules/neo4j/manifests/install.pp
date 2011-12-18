@@ -73,7 +73,24 @@ class neo4j {
         creates => "$neo4j_home/data/neo4j-coord.pid",
         user => $neo4j_user,
         logoutput => true,
-        require => [File["$neo4j_home/data/coordinator/myid"], File["$neo4j_home/conf/coord.cfg"]]
+        require => [
+          File["$neo4j_home/data/coordinator/myid"], 
+          File["$neo4j_home/conf/coord.cfg"]
+        ]
+    }
+
+    exec {
+      "start server":
+        cwd => "$neo4j_home",
+        command => "$neo4j_home/bin/neo4j start",
+        creates => "$neo4j_home/data/neo4j-service.pid",
+        user => $neo4j_user,
+        logoutput => true,
+        require => [
+          Exec["start coordinator"], 
+          File["$neo4j_home/conf/neo4j.properties"], 
+          File["$neo4j_home/conf/neo4j-server.properties"]
+        ]
     }
   }
 }

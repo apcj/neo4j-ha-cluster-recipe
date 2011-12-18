@@ -22,6 +22,7 @@
 4. `git clone git://github.com/apcj/neo4j-ha-cluster-recipe.git && cd neo4j-ha-cluster-recipe`
 5. `vagrant up`
 6. `vagrant provision`
+7. You should have a fully functioning 3-server HA cluster, with ports forwarded to the webadmin pages at <http://localhost:7001/>, <http://localhost:7002/> and <http://localhost:7003/>.
 
 Step 6 should not be required, because `vagrant up` does a `provision` itself.  However, you will notice that the neo4j process on the first server will fail to start during `vagrant up`.  This is because zookeeper isn't able to contact any of the other hosts in the roster at the time the first server starts.  This is something we can hopefully fix soon.  In any case, the problem is quickly resolved with a quick `vagrant provision`, which finds what's missing and starts the missing process on just server1.
 

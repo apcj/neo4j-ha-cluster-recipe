@@ -6,7 +6,7 @@ class neo4j {
     $neo4j_user = "vagrant"
     $user_home = "/home/vagrant"
     $downloads = "$user_home/downloads"
-    $distribution = "neo4j-enterprise-1.6.M02"
+    $distribution = "neo4j-enterprise-1.6.1"
     $neo4j_home = "$user_home/$distribution"
     
     file {

@@ -8,7 +8,7 @@ class java::openjdk {
 
   package { 'openjdk-6-jdk':
     ensure => present,
-    before => Exec['apt-update']
+    require => Exec['apt-update']
   }
 
   group { 'puppet':
